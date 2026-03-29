@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    # 挂载卷 (Volume) 用于开发环境
+    # 代码修改后容器内同步更新
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./sql_app.db
+    # 覆盖默认 CMD，开启 reload 模式
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
