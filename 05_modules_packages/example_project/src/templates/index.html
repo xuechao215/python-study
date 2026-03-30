@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 虚拟环境示例应用</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            display: inline-block;
+            width: 120px;
+        }
+
+        .info-value {
+            color: #333;
+        }
+
+        .api-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .api-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .api-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .api-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .api-card p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+        }
+
+        .btn-secondary {
+            background: #48bb78;
+        }
+
+        .btn-secondary:hover {
+            background: #38a169;
+        }
+
+        .btn-danger {
+            background: #f56565;
+        }
+
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+
+        .response-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .api-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Python 虚拟环境示例应用-薛超</h1>
+            <p>演示 Python 虚拟环境、模块导入和依赖管理的最佳实践</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <h2>应用信息</h2>
+                <div class="info-item">
+                    <span class="info-label">应用状态:</span>
+                    <span class="info-value" id="app-status">正在检查...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Python 版本:</span>
+                    <span class="info-value" id="python-version">正在检查...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">虚拟环境:</span>
+                    <span class="info-value" id="virtual-env">正在检查...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">服务器时间:</span>
+                    <span class="info-value" id="server-time">正在检查...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Flask 版本:</span>
+                    <span class="info-value" id="flask-version">正在检查...</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>系统信息</h2>
+                <div class="info-item">
+                    <span class="info-label">主机地址:</span>
+                    <span class="info-value" id="host-address">127.0.0.1:5000</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">API 超时:</span>
+                    <span class="info-value" id="api-timeout">30 秒</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">调试模式:</span>
+                    <span class="info-value" id="debug-mode">否</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">请求计数:</span>
+                    <span class="info-value" id="request-count">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">最后更新:</span>
+                    <span class="info-value" id="last-update">--</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>API 测试</h2>
+            <div class="api-grid">
+                <div class="api-card">
+                    <h3>健康检查</h3>
+                    <p>检查应用运行状态</p>
+                    <button class="btn btn-secondary" onclick="testHealth()">测试健康检查</button>
+                    <div class="response-box" id="health-response"></div>
+                </div>
+
+                <div class="api-card">
+                    <h3>外部 API 调用</h3>
+                    <p>调用 GitHub API 测试网络连接</p>
+                    <button class="btn" onclick="testExternalApi()">测试外部 API</button>
+                    <div class="response-box" id="external-api-response"></div>
+                </div>
+
+                <div class="api-card">
+                    <h3>回显测试</h3>
+                    <p>发送 JSON 数据并接收回显</p>
+                    <button class="btn" onclick="testEcho()">测试回显</button>
+                    <div class="response-box" id="echo-response"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 Python 学习项目 | 使用 Flask 构建 | 虚拟环境示例</p>
+        </div>
+    </div>
+
+    <script>
+        let requestCount = 0;
+
+        // 更新请求计数
+        function updateRequestCount() {
+            requestCount++;
+            document.getElementById('request-count').textContent = requestCount;
+            document.getElementById('last-update').textContent = new Date().toLocaleTimeString();
+        }
+
+        // 格式化 JSON 显示
+        function formatJson(data) {
+            try {
+                return JSON.stringify(JSON.parse(data), null, 2);
+            } catch {
+                return data;
+            }
+        }
+
+        // 加载应用信息
+        async function loadAppInfo() {
+            try {
+                const response = await fetch('/api/info');
+                const data = await response.json();
+
+                document.getElementById('app-status').textContent = '运行正常';
+                document.getElementById('app-status').style.color = '#48bb78';
+                document.getElementById('python-version').textContent = data.python_version.split('(')[0].trim();
+                document.getElementById('virtual-env').textContent = data.virtual_env;
+                document.getElementById('server-time').textContent = new Date(data.timestamp).toLocaleString();
+
+                updateRequestCount();
+            } catch (error) {
+                document.getElementById('app-status').textContent = '连接失败';
+                document.getElementById('app-status').style.color = '#f56565';
+                console.error('加载应用信息失败:', error);
+            }
+        }
+
+        // 测试健康检查
+        async function testHealth() {
+            const responseBox = document.getElementById('health-response');
+            responseBox.textContent = '请求中...';
+
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                responseBox.textContent = formatJson(JSON.stringify(data));
+                responseBox.style.color = '#333';
+                updateRequestCount();
+            } catch (error) {
+                responseBox.textContent = '请求失败: ' + error.message;
+                responseBox.style.color = '#f56565';
+            }
+        }
+
+        // 测试外部 API
+        async function testExternalApi() {
+            const responseBox = document.getElementById('external-api-response');
+            responseBox.textContent = '正在调用 GitHub API...';
+
+            try {
+                const response = await fetch('/api/external');
+                const data = await response.json();
+                responseBox.textContent = formatJson(JSON.stringify(data));
+                responseBox.style.color = data.status === 'success' ? '#333' : '#f56565';
+                updateRequestCount();
+            } catch (error) {
+                responseBox.textContent = '请求失败: ' + error.message;
+                responseBox.style.color = '#f56565';
+            }
+        }
+
+        // 测试回显
+        async function testEcho() {
+            const responseBox = document.getElementById('echo-response');
+            responseBox.textContent = '发送测试数据...';
+
+            const testData = {
+                message: 'Hello from frontend!',
+                timestamp: new Date().toISOString(),
+                randomNumber: Math.floor(Math.random() * 1000),
+                testArray: ['item1', 'item2', 'item3']
+            };
+
+            try {
+                const response = await fetch('/api/echo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                const data = await response.json();
+                responseBox.textContent = formatJson(JSON.stringify(data));
+                responseBox.style.color = '#333';
+                updateRequestCount();
+            } catch (error) {
+                responseBox.textContent = '请求失败: ' + error.message;
+                responseBox.style.color = '#f56565';
+            }
+        }
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAppInfo();
+
+            // 设置 Flask 版本（从后端获取或硬编码）
+            document.getElementById('flask-version').textContent = '2.3.3';
+
+            // 设置其他静态信息
+            document.getElementById('host-address').textContent = window.location.host;
+            document.getElementById('api-timeout').textContent = '30 秒';
+            document.getElementById('debug-mode').textContent = '否';
+
+            // 每30秒更新一次应用信息
+            setInterval(loadAppInfo, 30000);
+        });
+    </script>
+</body>
+</html>

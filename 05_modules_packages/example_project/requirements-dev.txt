@@ -1,0 +1,54 @@
+# 开发依赖
+# 这些包只在开发时使用，不会部署到生产环境
+
+# 包含生产依赖
+-r requirements.txt
+
+# 测试框架
+pytest==7.1.2
+pytest-cov==3.0.0
+pytest-mock==3.7.0
+
+# 代码格式化
+black==22.3.0
+isort==5.10.1
+
+# 代码检查
+flake8==4.0.1
+mypy==0.950
+pylint==2.13.9
+
+# 类型检查
+types-requests==2.27.11
+
+# 文档生成
+sphinx==4.5.0
+sphinx-rtd-theme==1.0.0
+
+# 开发服务器
+watchdog==2.1.9
+
+# 调试工具
+ipdb==0.13.9
+ipython==8.3.0
+
+# 依赖管理工具
+pip-tools==6.6.0
+
+# 虚拟环境管理
+virtualenv==20.14.1
+
+# 构建工具
+build==0.8.0
+twine==4.0.0
+
+# 安全检查
+safety==2.0.0
+bandit==1.7.4
+
+# 性能分析
+py-spy==0.3.12
+memory-profiler==0.60.0
+
+# 注意: 开发依赖应该与生产依赖分开管理
+# 可以使用 pip install -r requirements-dev.txt 安装所有开发工具
