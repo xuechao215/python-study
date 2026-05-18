@@ -1,0 +1,14 @@
+{
+  "name": "python-study",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Python 学习 + 全栈实战（前端开发者向）",
+  "scripts": {
+    "start:fullstack": "bash scripts/start-fullstack.sh",
+    "dev:backend": "cd python-project-demo && (test -d venv && . venv/bin/activate; python manage.py dev)",
+    "dev:frontend": "cd react-frontend-demo && npm run dev",
+    "bridge:client": "python 13_fullstack_bridge/01_http_client.py"
+  },
+  "keywords": ["python", "fastapi", "learning"],
+  "license": "ISC"
+}

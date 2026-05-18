@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Item, ItemCreate } from '../types';
+import { useEffect, useState } from 'react';
+import type { Item, ItemCreate } from '../types';
 import { itemApi } from '../lib/api';
 import { Edit2, Trash2, Plus, RefreshCw, AlertCircle } from 'lucide-react';
 import { ItemForm } from './ItemForm';

@@ -316,6 +316,51 @@ from typing import List, Dict, Optional, Union
 
 ---
 
+## 13_fullstack_bridge - 全栈衔接（前后端协作）
+
+> 先阅读 [FULLSTACK_GUIDE.md](./FULLSTACK_GUIDE.md)，并启动 `python-project-demo` 后端。
+
+### 练习1: 用 Swagger 完成 CRUD
+1. 打开 http://localhost:8000/docs
+2. 用 `POST /api/v1/items/` 创建 2 条数据
+3. 用 `GET /api/v1/items/` 查看列表
+4. 用 `PUT` 修改其中一条的 `title`
+5. 用 `DELETE` 删除一条
+
+记录：每次请求的 **Method、URL、Request Body、Response 状态码**。
+
+### 练习2: Python 当客户端
+```bash
+# 后端已启动时
+python 13_fullstack_bridge/01_http_client.py
+```
+对比脚本里的 POST body 与 Swagger 里的是否一致。
+
+### 练习3: 对照三层类型
+填写下表（参考 `python-project-demo/app/schemas/item.py` 与 `react-frontend-demo/src/types/index.ts`）：
+
+| 字段 | Python (Pydantic) | TypeScript | 示例值 |
+|------|-------------------|------------|--------|
+| title | ? | ? | "MacBook" |
+| price | ? | ? | 1999 |
+| is_active | ? | ? | true |
+
+### 练习4: 在浏览器里追踪一次请求
+1. 启动 `react-frontend-demo`（`npm run dev`）
+2. 打开 DevTools → Network
+3. 创建一条 Item，回答：
+   - Request URL 完整路径是什么？
+   - 响应状态码是 200 还是 201？
+   - Response JSON 里比请求体多了哪些字段？（提示：`id`）
+
+### 练习5: 从 CLI Todo 到 API 的迁移思考
+`09_practical_example.py` 用 `todos.json` 存数据。若改成 Web 版，请用文字说明：
+1. 前端的「列表展示」对应哪个 HTTP 方法？
+2. 「添加任务」对应哪个？
+3. 谁负责读写数据库——React 还是 FastAPI？
+
+---
+
 ## 🎯 综合项目
 
 ### 项目1: 学生管理系统

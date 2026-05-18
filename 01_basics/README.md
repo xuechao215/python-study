@@ -1,5 +1,7 @@
 # 01_basics - Python基础语法
 
+> 完整 30 天路线见仓库根目录 [START_HERE.md](../START_HERE.md)
+
 ## 🎯 学习目标
 - 掌握Python的基本语法结构
 - 理解Python与JavaScript的语法差异

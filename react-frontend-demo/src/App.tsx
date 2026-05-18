@@ -1,25 +1,10 @@
-import React, { useState } from 'react';
 import ItemList from './components/ItemList';
-import { ItemForm } from './components/ItemForm';
-import { itemApi } from './lib/api';
-import { ItemCreate } from './types';
 
+/**
+ * 全栈演示入口：CRUD 在 ItemList + lib/api.ts
+ * 后端: cd python-project-demo && python manage.py dev
+ */
 function App() {
-  const [isCreating, setIsCreating] = useState(false);
-
-  const handleCreate = async (data: ItemCreate) => {
-    try {
-      await itemApi.create(data);
-      setIsCreating(false);
-      // Trigger refresh (handled inside ItemList for simplicity in this demo,
-      // but ideally state should be lifted or use React Query)
-      window.location.reload(); 
-    } catch (err) {
-      console.error(err);
-      alert('Failed to create item');
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm border-b border-gray-200">
@@ -29,7 +14,7 @@ function App() {
               Py
             </div>
             <h1 className="text-xl font-bold text-gray-900 tracking-tight">
-              Python Fullstack Demo
+              Python + React 全栈演示
             </h1>
           </div>
           <a
@@ -38,21 +23,17 @@ function App() {
             rel="noopener noreferrer"
             className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
           >
-            Backend Docs &rarr;
+            后端 Swagger 文档 →
           </a>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
+        <p className="text-sm text-gray-600 mb-6 max-w-2xl">
+          本页通过 HTTP 调用 FastAPI。打开开发者工具 Network 可看到 GET/POST/PUT/DELETE 与 JSON 响应。
+        </p>
         <ItemList />
       </main>
-
-      {isCreating && (
-        <ItemForm
-          onSubmit={handleCreate}
-          onCancel={() => setIsCreating(false)}
-        />
-      )}
     </div>
   );
 }

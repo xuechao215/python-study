@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Item, ItemCreate } from '../types';
+import { useState } from 'react';
+import type { Item, ItemCreate } from '../types';
 import { X } from 'lucide-react';
 
 interface ItemFormProps {

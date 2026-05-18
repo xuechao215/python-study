@@ -153,6 +153,20 @@ async def fetch_data(url):
 4. **练习项目转换**：尝试将小型JavaScript项目转换为Python，加深理解。
 5. **关注生态系统**：了解Python在Web开发、数据分析、机器学习等领域的流行框架。
 
+## Web / API：前后端协作对照
+
+| 概念 | 前端 (JS/TS) | Python 后端 (FastAPI) |
+|------|--------------|------------------------|
+| 发请求 | `fetch(url)` / `axios.get(url)` | `httpx.get(url)` / `requests.get(url)` |
+| JSON 解析 | `res.json()` | `response.json()` |
+| 路由 | Express `app.get('/items')` | `@router.get("/items/")` |
+| 请求体校验 | Zod / 手动 | Pydantic `ItemCreate` |
+| 环境变量 | `import.meta.env.VITE_*` | `pydantic-settings` / `os.environ` |
+| 跨域 | 浏览器受 CORS 限制 | 后端配置 `CORSMiddleware` |
+| 类型定义 | `interface Item` | `class Item(BaseModel)` |
+
+本仓库完整链路：**CLI Todo** (`09_practical_example.py`) → **FastAPI** (`python-project-demo`) → **React** (`react-frontend-demo`)。详见 [FULLSTACK_GUIDE.md](../../FULLSTACK_GUIDE.md)。
+
 ## 资源推荐
 
 - **官方文档**：[Python官方文档](https://docs.python.org/3/)

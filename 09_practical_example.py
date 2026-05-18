@@ -1,6 +1,9 @@
 # 09_practical_example.py
 # 综合实战：简单的命令行待办事项应用 (CLI Todo App)
 # 结合了：类、文件操作、JSON、异常处理、用户输入
+#
+# 学完后请阅读：FULLSTACK_GUIDE.md
+# 同一套「增删改查」在 Web 里会变成：FastAPI (python-project-demo) + React (react-frontend-demo)
 
 import json
 import os

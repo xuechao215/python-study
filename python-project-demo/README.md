@@ -3,6 +3,8 @@
 这是一个为前端开发者准备的 Python 示例项目，演示了现代 Python 开发的工程化实践。
 它使用 [FastAPI](https://fastapi.tiangolo.com/) 构建了一个简单的 REST API。
 
+> **学习上下文**：建议先完成仓库根目录的 [09_practical_example.py](../09_practical_example.py)（CLI Todo），再阅读 [FULLSTACK_GUIDE.md](../FULLSTACK_GUIDE.md)，最后与本目录 API 及 [react-frontend-demo](../react-frontend-demo) 联调。
+
 ## 功能
 
 - RESTful API (GET, POST, PUT, DELETE)

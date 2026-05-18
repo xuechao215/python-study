@@ -1,8 +1,11 @@
 # Python 学习之路 (Frontend Developer Edition)
 
-欢迎来到 Python 学习项目！作为一个前端开发者，你已经具备了编程基础（JavaScript/TypeScript），這将极大地加速你的 Python 学习过程。
+欢迎来到 Python 学习项目！作为一个前端开发者，你已经具备了编程基础（JavaScript/TypeScript），这将极大地加速你的 Python 学习过程。
 
-本项目旨在通过对比 JS 和 Python，以及大量的实战示例，帮助你快速掌握 Python。
+本项目旨在通过对比 JS 和 Python、可运行示例，以及 **CLI → FastAPI → React** 全链路实战，帮助你**直接学会 Python**，并**理解前后端如何协作**。
+
+> **新手请从这里开始**：[START_HERE.md](./START_HERE.md)（30 天学习路线）  
+> **学完全栈衔接**：[FULLSTACK_GUIDE.md](./FULLSTACK_GUIDE.md)（HTTP、CORS、类型对照、请求链路）
 
 ## 🎯 学习目标
 
@@ -32,6 +35,7 @@
 | [10_async_programming](./10_async_programming) | 异步编程 | 掌握async/await | 2天 |
 | [11_testing](./11_testing) | 单元测试 | 学习编写测试用例 | 1天 |
 | [12_type_hints](./12_type_hints) | 类型提示 | 掌握类型注解和MyPy | 1天 |
+| [13_fullstack_bridge](./13_fullstack_bridge) | **全栈衔接** | HTTP 客户端、请求链路（进实战前必读） | 1天 |
 
 ### 🔴 第三阶段：项目实战 (2-3周)
 | 项目 | 技术栈 | 学习目标 | 预计时间 |
@@ -56,6 +60,9 @@ python-study/
 ├── 10_async_programming/   # 异步编程
 ├── 11_testing/             # 单元测试
 ├── 12_type_hints/          # 类型提示
+├── 13_fullstack_bridge/    # 全栈衔接（HTTP + 请求对照）
+├── START_HERE.md           # ⭐ 推荐学习入口
+├── FULLSTACK_GUIDE.md      # ⭐ 前后端协作详解
 ├── python-project-demo/    # FastAPI项目模板
 ├── react-frontend-demo/    # React前端演示
 ├── nextjs-shadcn/          # Next.js + Shadcn UI演示
@@ -85,13 +92,17 @@ python-study/
    pip --version
    ```
 
-3. **运行示例代码**
+3. **按学习路线开始**（推荐）
    ```bash
-   # 运行Hello World
+   # 打开学习入口，按天执行
+   open START_HERE.md   # 或在编辑器中阅读
+
+   # 运行 Hello World
    python 01_basics/01_hello_world.py
 
-   # 运行Todo应用
-   python 09_practical_example.py
+   # 完成 CLI Todo 后，启动全栈演示
+   ./scripts/start-fullstack.sh
+   # 或手动：终端1 python-project-demo → 终端2 react-frontend-demo
    ```
 
 ### 开发工具推荐
@@ -135,11 +146,20 @@ python-study/
 - **标准库**：Python有丰富的内置库，减少依赖第三方包
 
 ### 3. 实践方法
-1. **按顺序学习**：从01_basics开始，逐步推进
-2. **动手编码**：每个示例都自己运行一遍
-3. **修改实验**：尝试修改代码，观察结果变化
-4. **对比学习**：参考06_frontend_comparison中的对比表
-5. **项目驱动**：完成09_practical_example.py的Todo应用
+1. **跟路线走**：按 [START_HERE.md](./START_HERE.md) 的 30 天计划执行
+2. **动手编码**：每个 `.py` 都运行并改几行观察结果
+3. **做练习**：完成 [EXERCISES.md](./EXERCISES.md) 对应章节
+4. **对比学习**：参考 [06_frontend_comparison](./06_frontend_comparison)
+5. **串起全栈**：Todo CLI → [FULLSTACK_GUIDE](./FULLSTACK_GUIDE.md) → FastAPI + React
+
+### 4. 前后端如何串起来（一图）
+
+```
+09 CLI Todo (todos.json)  →  python-project-demo (REST + DB)  →  react-frontend-demo (页面)
+     你熟悉的逻辑              同一套 CRUD，换成 HTTP + JSON           axios 调 API 渲染 UI
+```
+
+详见 [FULLSTACK_GUIDE.md](./FULLSTACK_GUIDE.md)。
 
 ## 🔧 常见问题
 
